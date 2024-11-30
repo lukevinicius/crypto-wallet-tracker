@@ -1,6 +1,7 @@
 import { Elysia } from 'elysia'
 import { heliusWebhook } from './routes/helius-webhook'
 import { heliusTargetWallet } from './routes/add-target-wallet'
+import { deleteHeliusTargetWallet } from './routes/delete-target-wallet'
 // import { env } from '@/env'
 // import { cron } from '@elysiajs/cron'
 // import { sendMessageToTelegram } from './utils/send-message-to-telegram'
@@ -77,6 +78,7 @@ const app = new Elysia()
   // )
   .use(heliusWebhook)
   .use(heliusTargetWallet)
+  .use(deleteHeliusTargetWallet)
   .listen(3000)
 
 console.log(

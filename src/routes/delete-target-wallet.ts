@@ -20,8 +20,8 @@ interface IRequestEditWebhook {
   authHeader: string
 }
 
-export const heliusTargetWallet = new Elysia().put(
-  '/helius/add-target-wallet',
+export const deleteHeliusTargetWallet = new Elysia().delete(
+  '/helius/delete-target-wallet',
   async ({ body }) => {
     const { data } = await axios.get<IResponseWebhook>(
       `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
@@ -35,6 +35,10 @@ export const heliusTargetWallet = new Elysia().put(
         wallets[index] = wallet.replace(' ', '')
       }
     })
+
+    data.accountAddresses = data.accountAddresses.filter(
+      (address) => !wallets.includes(address),
+    )
 
     data.accountAddresses.push(...wallets)
 
