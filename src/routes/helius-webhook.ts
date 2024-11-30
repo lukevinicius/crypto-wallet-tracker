@@ -40,8 +40,10 @@ export const heliusWebhook = new Elysia().post(
     const tokensCreated = body
       .map((transaction: any) => {
         return {
-          signature: transaction.signature,
+          feePayer: transaction.feePayer,
+          mint: body[0].tokenTransfers[0].mint,
           type: transaction.type,
+          timestamp: transaction.timestamp,
         }
       })
       .filter((transaction: any) => {
@@ -50,9 +52,9 @@ export const heliusWebhook = new Elysia().post(
 
     if (tokensCreated.length > 0) {
       await sendMessageToTelegram(
-        `🆕<b>TOKEN CREATED!</b>🆕\n\n${transfers.map(
+        `🆕<b>TOKEN CREATED!</b>🆕\n\n${tokensCreated.map(
           (transaction: any) =>
-            `\n\nSIGNATURE:</b> https://solscan.io/tx/${transaction.signature}`,
+            `\n\nCREATOR: ${transaction.feePayer}\n\nSOLSCAN:</b> https://solscan.io/token/${transaction.mint}\n\nGMGN: https://gmgn.ai/sol/token/${transaction.mint}`,
         )}`,
       )
     }
