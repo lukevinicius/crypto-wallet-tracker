@@ -27,7 +27,9 @@ export const heliusTargetWallet = new Elysia().put(
       `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
     )
 
-    data.accountAddresses.push(body.wallet)
+    const wallets = body.wallet.split(',')
+
+    data.accountAddresses.push(...wallets)
 
     const requestData: IRequestEditWebhook = {
       webhookURL: data.webhookURL,
