@@ -8,6 +8,7 @@ export const heliusWebhook = new Elysia().post(
   async ({ body }) => {
     console.log(body)
 
+    await sendMessageToTelegram(`${JSON.stringify(body)}`)
     await sendMessageToTelegram(`${body}`)
 
     const transfers = body
