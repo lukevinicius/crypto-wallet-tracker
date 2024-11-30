@@ -6,6 +6,10 @@ import Elysia, { t } from 'elysia'
 export const heliusWebhook = new Elysia().post(
   '/helius-webhook',
   async ({ body }) => {
+    console.log(body)
+
+    await sendMessageToTelegram(`${body}`)
+
     const transfers = body
       .map((transaction: any) => {
         return {
@@ -52,10 +56,6 @@ export const heliusWebhook = new Elysia().post(
             `\n\n<b>SIGNATURE ${index + 1} - ${transaction.signature}</b>\n<b>GMGN:</b> https://gmgn.ai/sol/address/${transaction.receiver}`,
         )}`,
       )
-    }
-
-    return {
-      message: 'Hello from Helius Webhook!',
     }
   },
   {
