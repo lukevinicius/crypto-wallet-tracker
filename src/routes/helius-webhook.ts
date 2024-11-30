@@ -50,11 +50,11 @@ export const heliusWebhook = new Elysia().post(
 
     if (tokensCreated.length > 0) {
       await sendMessageToTelegram(
-        `🆕<b>TOKEN CREATED!</b>🆕
-        \n\n<b>👨‍🍳CREATOR:</b> ${tokensCreated[0].feePayer}
+        `<b>🟢🟢🚀NEW TOKEN CREATED</b>
+        \n\n<b>👨‍🍳DEV:</b> ${tokensCreated[0].feePayer}
         \n\n<b>👾SOLSCAN:</b> https://solscan.io/token/${tokensCreated[0].mint}
         \n\n<b>🐊GMGN:</b> https://gmgn.ai/sol/token/${tokensCreated[0].mint}
-        \n\n<b>🔗CA:</b> https://gmgn.ai/sol/token/${tokensCreated[0].mint}`,
+        \n\n<b>🔗CA:</b> ${tokensCreated[0].mint}`,
         // \n\n<b>🕐CREATION DATE:</b> ${dayjs(new Date(tokensCreated[0].timestamp)).format('DD/MM/YYYY HH:mm:ss')}
       )
     }
