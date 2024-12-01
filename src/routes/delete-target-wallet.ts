@@ -27,20 +27,9 @@ export const deleteHeliusTargetWallet = new Elysia().delete(
       `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
     )
 
-    const wallets = body.wallet.split(',')
-
-    // remove wallets with spaces
-    wallets.forEach((wallet, index) => {
-      if (wallet.includes(' ')) {
-        wallets[index] = wallet.replace(' ', '')
-      }
-    })
-
     data.accountAddresses = data.accountAddresses.filter(
-      (address) => !wallets.includes(address),
+      (address) => address !== body.wallet,
     )
-
-    data.accountAddresses.push(...wallets)
 
     const requestData: IRequestEditWebhook = {
       webhookURL: data.webhookURL,
