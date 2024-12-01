@@ -40,6 +40,7 @@ export const heliusWebhook = new Elysia().post(
         return {
           feePayer: transaction.feePayer,
           mint: body[0].tokenTransfers[0].mint,
+          toUserAccount: body[0].tokenTransfers[0].toUserAccount,
           type: transaction.type,
           timestamp: transaction.timestamp,
         }
@@ -54,6 +55,7 @@ export const heliusWebhook = new Elysia().post(
         \n\n<b>👨‍🍳DEV:</b> ${tokensCreated[0].feePayer}
         \n\n<b>👾SOLSCAN:</b> https://solscan.io/token/${tokensCreated[0].mint}
         \n\n<b>🐊GMGN:</b> https://gmgn.ai/sol/token/${tokensCreated[0].mint}
+        \n\n<b>🐙PHOTON:</b> https://photon-sol.tinyastro.io/en/lp/${tokensCreated[0].toUserAccount}?handle=907954a92624d6498fc60
         \n\n<b>🔗CA:</b> ${tokensCreated[0].mint}`,
         // \n\n<b>🕐CREATION DATE:</b> ${dayjs(new Date(tokensCreated[0].timestamp)).format('DD/MM/YYYY HH:mm:ss')}
       )
