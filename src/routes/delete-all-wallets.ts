@@ -30,7 +30,7 @@ export const deleteAllHeliusWallets = new Elysia().delete(
     const requestData: IRequestEditWebhook = {
       webhookURL: data.webhookURL,
       transactionTypes: data.transactionTypes,
-      accountAddresses: [],
+      accountAddresses: [''],
       webhookType: data.webhookType,
       authHeader: data.authHeader,
     }
