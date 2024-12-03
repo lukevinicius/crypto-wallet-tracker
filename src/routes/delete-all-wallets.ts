@@ -27,19 +27,15 @@ export const deleteAllHeliusWallets = new Elysia().delete(
       `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
     )
 
-    const requestData: IRequestEditWebhook = {
-      webhookURL: data.webhookURL,
-      transactionTypes: data.transactionTypes,
-      accountAddresses: [''],
-      webhookType: data.webhookType,
-      authHeader: data.authHeader,
-    }
-
     await axios
       .put(
         `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
         {
-          ...requestData,
+          webhookURL: data.webhookURL,
+          transactionTypes: data.transactionTypes,
+          accountAddresses: [''],
+          webhookType: data.webhookType,
+          authHeader: data.authHeader,
         },
       )
       .catch((error) => {
