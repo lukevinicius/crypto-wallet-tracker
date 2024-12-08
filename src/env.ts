@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
+  GMGN_CODE: z.string(),
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
