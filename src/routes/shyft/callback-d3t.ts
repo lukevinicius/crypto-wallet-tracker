@@ -4,24 +4,6 @@ import { env } from '@/env'
 import { sendMessageToTelegram } from '@/utils/send-message-to-telegram'
 import axios from 'axios'
 
-interface IResponseWebhook {
-  webhookID: string
-  wallet: string
-  webhookURL: string
-  transactionTypes: string[]
-  accountAddresses: string[]
-  webhookType: string
-  authHeader: string
-}
-
-interface IRequestEditWebhook {
-  webhookURL: string
-  transactionTypes: string[]
-  accountAddresses: string[]
-  webhookType: string
-  authHeader: string
-}
-
 export const shyftD3tCallback = new Elysia().post(
   '/shyft/callback-d3t',
   async ({ body }) => {
@@ -47,30 +29,18 @@ export const shyftD3tCallback = new Elysia().post(
       )
 
       if (data.result.length <= 1) {
-        const { data } = await axios.get<IResponseWebhook>(
-          `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
-        )
-
-        data.accountAddresses.push(action.info.receiver)
-
-        const requestData: IRequestEditWebhook = {
-          webhookURL: data.webhookURL,
-          transactionTypes: data.transactionTypes,
-          accountAddresses: data.accountAddresses,
-          webhookType: data.webhookType,
-          authHeader: data.authHeader,
-        }
-
-        await axios
-          .put(
-            `${env.HELIUS_API_URL}/${env.HELIUS_WEBHOOK_ID}?api-key=${env.HELIUS_API_KEY}`,
-            {
-              ...requestData,
+        await axios.post(
+          `${env.SHYFT_API_URL}/sol/v1/callback/add-addresses`,
+          {
+            id: env.SHYFT_WALLETS_CALLBACK_ID,
+            addresses: [action.info.receiver],
+          },
+          {
+            headers: {
+              'x-api-key': env.SHYFT_API_KEY,
             },
-          )
-          .catch((error) => {
-            console.error(error)
-          })
+          },
+        )
 
         await sendMessageToTelegram(
           `<b>🟢🟢👛WALLET NO TRADING</b>
