@@ -4,6 +4,7 @@ import { heliusTargetWallet } from './routes/add-target-wallet'
 import { deleteHeliusTargetWallet } from './routes/delete-target-wallet'
 import { deleteAllHeliusWallets } from './routes/delete-all-wallets'
 import { shyftD3tCallback } from './routes/shyft/callback-d3t'
+import { shyftTokenWalletsCallback } from './routes/shyft/token-wallets-callback'
 // import { env } from '@/env'
 // import { cron } from '@elysiajs/cron'
 // import { sendMessageToTelegram } from './utils/send-message-to-telegram'
@@ -83,6 +84,7 @@ const app = new Elysia()
   .use(deleteHeliusTargetWallet)
   .use(deleteAllHeliusWallets)
   .use(shyftD3tCallback)
+  .use(shyftTokenWalletsCallback)
   .listen(3000)
 
 console.log(
