@@ -1,7 +1,6 @@
 import Elysia, { t } from 'elysia'
 
 import { env } from '@/env'
-import { sendMessageToTelegram } from '@/utils/send-message-to-telegram'
 import axios from 'axios'
 
 export const shyftD3tCallback = new Elysia().post(
@@ -42,12 +41,12 @@ export const shyftD3tCallback = new Elysia().post(
           },
         )
 
-        await sendMessageToTelegram(
-          `<b>🟢🟢👛WALLET NO TRADING</b>
-            \n\n<b>👨‍🍳DEV:</b> ${action.info.receiver}
-            \n\n<b>🐊GMGN:</b> https://gmgn.ai/sol/address/${env.GMGN_CODE}_${action.info.receiver}
-            \n\n<b>👾SOLSCAN:</b> https://solscan.io/account/${action.info.receiver}`,
-        )
+        // await sendMessageToTelegram(
+        //   `<b>🟢🟢👛WALLET NO TRADING</b>
+        //     \n\n<b>👨‍🍳DEV:</b> ${action.info.receiver}
+        //     \n\n<b>🐊GMGN:</b> https://gmgn.ai/sol/address/${env.GMGN_CODE}_${action.info.receiver}
+        //     \n\n<b>👾SOLSCAN:</b> https://solscan.io/account/${action.info.receiver}`,
+        // )
       }
     }
   },
