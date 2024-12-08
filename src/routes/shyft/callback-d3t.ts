@@ -74,7 +74,9 @@ export const shyftD3tCallback = new Elysia().post(
 
         await sendMessageToTelegram(
           `<b>🟢🟢👛WALLET NO TRADING</b>
-          \n\n<b>Wallet:</b> ${action.info.receiver}`,
+            \n\n<b>👨‍🍳DEV:</b> ${action.info.receiver}
+            \n\n<b>🐊GMGN:</b> https://gmgn.ai/sol/address/${action.info.receiver}
+            \n\n<b>👾SOLSCAN:</b> https://solscan.io/account/${action.info.receiver}`,
         )
       }
     }
